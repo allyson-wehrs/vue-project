@@ -1,0 +1,107 @@
+// Variables
+// __________________________________________________
+
+$wht          : #fff;
+$wht-95       : rgba($wht, 0.95);
+$wht-90       : rgba($wht, 0.90);
+$wht-85       : rgba($wht, 0.85);
+$wht-80       : rgba($wht, 0.80);
+$wht-75       : rgba($wht, 0.75);
+$wht-70       : rgba($wht, 0.70);
+$wht-65       : rgba($wht, 0.65);
+$wht-60       : rgba($wht, 0.60);
+$wht-55       : rgba($wht, 0.55);
+$wht-50       : rgba($wht, 0.50);
+$wht-45       : rgba($wht, 0.45);
+$wht-40       : rgba($wht, 0.40);
+$wht-35       : rgba($wht, 0.35);
+$wht-30       : rgba($wht, 0.30);
+$wht-25       : rgba($wht, 0.25);
+$wht-20       : rgba($wht, 0.20);
+$wht-15       : rgba($wht, 0.15);
+$wht-10       : rgba($wht, 0.10);
+
+$blk          : #000;
+$blk-95       : rgba($blk, 0.95);
+$blk-90       : rgba($blk, 0.90);
+$blk-85       : rgba($blk, 0.85);
+$blk-80       : rgba($blk, 0.80);
+$blk-75       : rgba($blk, 0.75);
+$blk-70       : rgba($blk, 0.70);
+$blk-65       : rgba($blk, 0.65);
+$blk-60       : rgba($blk, 0.60);
+$blk-55       : rgba($blk, 0.55);
+$blk-50       : rgba($blk, 0.50);
+$blk-45       : rgba($blk, 0.45);
+$blk-40       : rgba($blk, 0.40);
+$blk-35       : rgba($blk, 0.35);
+$blk-30       : rgba($blk, 0.30);
+$blk-25       : rgba($blk, 0.25);
+$blk-20       : rgba($blk, 0.20);
+$blk-15       : rgba($blk, 0.15);
+$blk-10       : rgba($blk, 0.10);
+
+// red
+$coral        : #fa5457;
+
+// orange
+$orange       : #fa8925;
+
+// yellow
+$gold         : #f6d51f;
+
+// green
+$seagreen     : #5fa55a;
+$seagreen-l   : #9FDBB5;
+$seagreen-d   : #0A7331;
+
+// blue
+$turquoise    : #01b4bc;
+
+// Screen Sizes
+// __________________________________________________
+
+$screen-xs   : 480px;
+$screen-sm   : 640px;
+$screen-md   : 960px;
+$screen-lg   : 1024px;
+$screen-xl   : 1200px;
+
+// Typography
+// __________________________________________________
+
+// Google Fonts
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Pacifico);
+
+// Fonts
+$brand-font: 'Pacifico', sans-serif;
+$body-font: 'Open Sans', sans-serif;
+
+// Sizes
+$h1-font-sizes: (
+  null       : 18px,
+  $screen-sm : 18px,
+  $screen-md : 22px,
+  $screen-lg : 26px
+);
+
+$h2-font-sizes: (
+  null       : 18px,
+  $screen-sm : 18px,
+  $screen-md : 22px,
+  $screen-lg : 26px
+);
+
+$nav-font-sizes: (
+  null       : 15px,
+  $screen-sm : 16px,
+  $screen-md : 18px,
+  $screen-lg : 20px
+);
+
+$p-font-sizes: (
+  null       : 15px,
+  $screen-sm : 16px,
+  $screen-md : 17px,
+  $screen-lg : 18px
+);

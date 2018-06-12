@@ -1,0 +1,179 @@
+a {
+  color: $blk;
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+// Headings
+.heading {
+  &--1 {
+    @include font-size($h1-font-sizes);
+  }
+  &--2 {
+    @include font-size($h2-font-sizes);
+  }
+  &--center {
+    text-align: center;
+  }
+  &--brand {
+    font-family: $brand-font;
+  }
+}
+
+// Forms
+input {
+  width: 400px;
+  max-width: 100%;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 15px;
+  margin: 10px 0;
+  @include font-size($p-font-sizes);
+}
+button {
+  width: 100%;
+  border: 1px solid black;
+  background-color: transparent;
+  padding: 14px 0;
+  margin-top: 10px;
+  cursor: pointer;
+  @include font-size($p-font-sizes);
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $wht-30 !important;
+  }
+}
+
+// layouts
+.layout {
+  &--flex {
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }
+  &--centered {
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.page-content {
+  width: 100%;
+  padding: 40px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid $blk;
+  margin-bottom: 40px;
+
+  .page-heading {
+    display: flex;
+    flex-wrap: wrap;
+
+    h2 {
+      width: 100%;
+      align-self: flex-end;
+      margin-bottom: 18px;
+    }
+  }
+
+  .profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 8px solid $wht-40;
+    display: block;
+    margin: 0 auto;
+  }
+
+  p {
+    font-style: italic;
+  }
+
+}
+
+// Variables
+$checkmark-width-left: 15px;
+$checkmark-width-right: 30px;
+$checkmark-position-top: 32px;
+$checkmark-position-left: 21px;
+$animation-speed: .3s;
+// Wrapper
+
+.check-wrap {
+  display: none;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 2px solid #00afcf;
+  position: relative;
+  overflow: hidden;
+  animation: wrap $animation-speed ease-in-out forwards;
+  animation-delay: .3s;
+  transform: scale(0);
+  
+  // Checkmark
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background-color: white;
+    width: 0;
+    height: 5px;
+    transform-origin: left;
+    animation-duration: $animation-speed;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+  }
+
+  &::before {
+    top: $checkmark-position-top;
+    left: $checkmark-position-left;
+    transform: rotate(45deg);
+    animation-name: left;
+    animation-delay: 0.8s;
+  }
+  
+  &::after {
+    top: $checkmark-position-top + 10px;
+    left: $checkmark-position-left + 8px;
+    transform: rotate(-45deg);
+    animation-name: right;
+    animation-delay: 1.1s;
+  }
+}
+
+// Animation wrapper
+@keyframes wrap {
+  0% {
+    background-color: transparent;
+    transform: scale(0);
+  } 100% {
+    background-color: #00afcf;
+    transform: scale(1);
+  }
+}
+
+// Checkmark keyframe mixin
+@mixin checkmark($name, $width) {
+  @keyframes #{$name} {
+    0% {
+      width: 0;
+    } 100% {
+      width: $width;
+    }
+  }
+}
+
+// Checkmark keyframes
+@include checkmark(left, $checkmark-width-left);
+@include checkmark(right, $checkmark-width-right);
