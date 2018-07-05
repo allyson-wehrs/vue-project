@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard layout--flex">
-    <Menu/>
-    <div class="page-content">
+    <Menu :color="userObj.color"/>
+    <div class="page-content"  v-bind:class="userObj.color">
       <div class="page-header">
         <div class="page-heading">
           <a href="#">Public Profile</a>

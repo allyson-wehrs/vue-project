@@ -1,5 +1,5 @@
 <template>
-  <div id="main-nav">
+  <div id="main-nav" v-bind:class="color">
     <div>
       <h1 class="heading heading--brand"><router-link to="/dashboard">Doodlebug</router-link></h1>
       <ul>
@@ -17,6 +17,7 @@ import * as firebase from 'firebase'
 
 export default {
   name: 'Menu',
+  props: ['color'],
   methods: {
     logout: function () {
       firebase.auth().signOut().then(() => {
@@ -43,6 +44,26 @@ export default {
   box-shadow: 5px 0 10px $blk-50;
   position: relative;
   z-index: 10;
+
+  &.turquoise {
+    background-color: $turquoise;
+  }
+
+  &.coral {
+    background-color: $coral;
+  }
+
+  &.orange {
+    background-color: $orange;
+  }
+
+  &.gold {
+    background-color: $gold;
+  }
+
+  &.seagreen {
+    background-color: $seagreen;
+  }
 }
 h1 a {
   color: $blk;
