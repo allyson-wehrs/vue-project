@@ -6,7 +6,9 @@ import SignUp from '@/components/SignUp'
 import Dashboard from '@/components/Dashboard'
 import Profile from '@/components/Profile'
 import Friends from '@/components/Friends'
-import firebase from 'firebase'
+import NewDrawing from '@/components/NewDrawing'
+import Drawing from '@/components/Drawing'
+import {auth} from '@/lib/fire'
 
 Vue.use(Router)
 
@@ -53,12 +55,29 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/new-drawing',
+      name: 'NewDrawing',
+      component: NewDrawing,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/drawing/',
+      name: 'Drawing',
+      props: true,
+      component: Drawing,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  let currentUser = firebase.auth().currentUser
+  let currentUser = auth.currentUser
   let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
   if (requiresAuth && !currentUser) next('login')

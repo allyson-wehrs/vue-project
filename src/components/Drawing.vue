@@ -1,12 +1,11 @@
 <template>
-  <div v-if="dataReady" class="dashboard layout--flex">
+  <div v-if="userObj && drawingObj" class="dashboard layout--flex">
     <Menu :color="userObj.color"/>
     <div class="page-content"  v-bind:class="userObj.color">
-      <Header title="My Drawings" :link="true" :userObj="userObj"/>
-      <div class="dashboard__drawings" v-for="(title, drawingID) in userObj.drawings" :key="drawingID" >
-        <router-link :to="{ name: 'Drawing', query: { id: drawingID }}">{{ title }}</router-link>
+      <Header :title="drawingObj.title" :link="false" :userObj="userObj"/>
+      <div class="dashboard__drawings">
+        <p>a cool drawing {{ id }}</p>
       </div>
-      <router-link to="/new-drawing"><button>+ New</button></router-link>
     </div>
   </div>
   <div v-else class="dashboard layout--flex">
@@ -23,10 +22,12 @@ import Menu from '@/components/Menu.vue'
 import Header from '@/components/Header.vue'
 
 export default {
-  name: 'Dashboard',
+  name: 'Drawing',
   data () {
     return {
       userObj: null,
+      drawingObj: null,
+      id: 0,
       dataReady: false
     }
   },
@@ -38,10 +39,23 @@ export default {
       this.loadData()
     },
     loadData: function () {
+      // Get the user data
       db.ref('users').on('value', (snapshot) => {
         this.userObj = snapshot.val()[auth.currentUser.uid]
-        this.dataReady = true
       })
+      // Get the drawing data
+      if (this.$route.query.id) {
+        // get the id of the drawing from the query params
+        this.id = this.$route.query.id
+        // retrieve the drawing from the database
+        db.ref('drawings').on('value', (snapshot) => {
+          this.drawingObj = snapshot.val()[this.id]
+          // make sure current user is authorized to view the drawing
+          if (auth.currentUser.uid !== this.drawingObj.author) {
+            this.drawingObj = null
+          }
+        })
+      }
     }
   },
   components: {
@@ -55,7 +69,4 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/settings.scss";
 
-.dashboard {
-  background-color: $turquoise;
-}
 </style>

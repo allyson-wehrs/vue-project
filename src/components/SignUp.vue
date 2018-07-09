@@ -32,7 +32,7 @@ export default {
                 email: this.email,
                 username: this.defaultUsername(this.email)
               }).then(
-                this.$router.replace('hello')
+                this.$router.replace('dashboard')
               )
             }
           })

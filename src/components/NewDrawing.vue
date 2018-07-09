@@ -2,11 +2,13 @@
   <div v-if="dataReady" class="dashboard layout--flex">
     <Menu :color="userObj.color"/>
     <div class="page-content"  v-bind:class="userObj.color">
-      <Header title="My Drawings" :link="true" :userObj="userObj"/>
-      <div class="dashboard__drawings" v-for="(title, drawingID) in userObj.drawings" :key="drawingID" >
-        <router-link :to="{ name: 'Drawing', query: { id: drawingID }}">{{ title }}</router-link>
+      <Header title="A New Drawing" :link="false" :userObj="userObj"/>
+      <div class="dashboard__drawings">
+        <label for="titleInput">Title:</label><br>
+        <input id="titleInput" type="text" v-model="title"><br>
+        <p>a cool drawing</p>
+        <button id="save-btn" v-on:click="saveDrawing">Save</button>
       </div>
-      <router-link to="/new-drawing"><button>+ New</button></router-link>
     </div>
   </div>
   <div v-else class="dashboard layout--flex">
@@ -23,10 +25,11 @@ import Menu from '@/components/Menu.vue'
 import Header from '@/components/Header.vue'
 
 export default {
-  name: 'Dashboard',
+  name: 'NewDrawing',
   data () {
     return {
       userObj: null,
+      title: '',
       dataReady: false
     }
   },
@@ -42,6 +45,22 @@ export default {
         this.userObj = snapshot.val()[auth.currentUser.uid]
         this.dataReady = true
       })
+    },
+    saveDrawing: function () {
+      var saveBtn = document.getElementById('save-btn')
+      var newKey = db.ref().push().key
+
+      db.ref().child('users/' + auth.currentUser.uid + '/drawings/').update({
+        [newKey]: true
+      })
+      db.ref().child('drawings/' + newKey).set({
+        title: this.title,
+        author: auth.currentUser.uid
+      }).then(
+        this.$router.replace('dashboard')
+      )
+      saveBtn.innerHTML = 'Saved!'
+      setTimeout(function () { saveBtn.innerHTML = 'Save' }, 1200)
     }
   },
   components: {
@@ -55,7 +74,4 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/settings.scss";
 
-.dashboard {
-  background-color: $turquoise;
-}
 </style>
